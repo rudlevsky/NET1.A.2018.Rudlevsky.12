@@ -12,7 +12,7 @@ namespace TimeEvent
         /// <summary>
         /// Contains subscribers methods.
         /// </summary>
-        public event Action<object, DataEventArgs> NewMail;
+        public EventHandler<DataEventArgs> OnNewMail;
 
         /// <summary>
         /// Generates data and sends it to subscribers after passed time.
@@ -21,7 +21,7 @@ namespace TimeEvent
         {
             Timer timer = new Timer(time);
 
-            timer.Elapsed += OnSendMail;
+            timer.Elapsed += SendMail;
             timer.Enabled = true;
             timer.AutoReset = false;
         }
@@ -30,14 +30,14 @@ namespace TimeEvent
         /// Notifies all subscrbers.
         /// </summary>
         protected virtual void Notify(DataEventArgs info) => 
-            NewMail?.Invoke(this, info);
+            OnNewMail?.Invoke(this, info);
 
         /// <summary>
         /// Event method for notifying.
         /// </summary>
-        public void OnSendMail() => 
+        public void SendMail() => 
             Notify(new DataEventArgs() { Message = ToString()});
 
-        private void OnSendMail(object sender, ElapsedEventArgs arg) => OnSendMail();                
+        private void SendMail(object sender, ElapsedEventArgs arg) => SendMail();                
     }
 }
