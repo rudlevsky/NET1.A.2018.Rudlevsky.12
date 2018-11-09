@@ -12,7 +12,7 @@ namespace TimeEvent
         /// <summary>
         /// Contains subscribers methods.
         /// </summary>
-        public EventHandler<DataEventArgs> OnNewMail;
+        public event EventHandler<DataEventArgs> OnNewMail;
 
         /// <summary>
         /// Generates data and sends it to subscribers after passed time.
