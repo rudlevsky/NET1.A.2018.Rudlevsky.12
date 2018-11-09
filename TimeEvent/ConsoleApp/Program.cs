@@ -15,7 +15,7 @@ namespace ConsoleApp
             receiver1.Register(sender);
             receiver2.Register(sender);
 
-            sender.OnSendMailTimed(1000);
+            sender.SendMailTimed(1000);
 
             while(receiver1.MessageInfo == null && receiver2.MessageInfo == null) { }
 

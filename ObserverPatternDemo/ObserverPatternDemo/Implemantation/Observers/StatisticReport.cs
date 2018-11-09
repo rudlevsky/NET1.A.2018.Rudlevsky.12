@@ -8,7 +8,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
     /// </summary>
     public class StatisticReport
     {
-        private List<WeatherInfo> listInfo;
+        private List<WeatherInfoEventArgs> listInfo;
         private List<string> senderName;
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// </summary>
         public StatisticReport()
         {
-            listInfo = new List<WeatherInfo>();
+            listInfo = new List<WeatherInfoEventArgs>();
             senderName = new List<string>();
         }
 
@@ -26,7 +26,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// <param name="observer">Observer for subscribing.</param>
         public void Register(WeatherData weather)
         {
-            weather.OnNewMail += Update;
+            weather.NewMail += Update;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// <param name="observer">Observer for unsubscribing.</param>
         public void Unregister(WeatherData weather)
         {
-            weather.OnNewMail -= Update;
+            weather.NewMail -= Update;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// </summary>
         /// <param name="data"></param>
         /// <param name="obj">Sender object.</param>
-        public void Update(object obj, WeatherInfo data)
+        public void Update(object obj, WeatherInfoEventArgs data)
         {
             listInfo.Add(data);
             senderName.Add(obj.ToString());

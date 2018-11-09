@@ -9,7 +9,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
     /// </summary>
     public class CurrentConditionsReport : IFormattable
     {
-        private WeatherInfo currentInfo;
+        private WeatherInfoEventArgs currentInfo;
         private string senderName;
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// </summary>
         /// <param name="data">New data for report.</param>
         /// <param name="obj">Sender object.</param>
-        public void Update(object obj, WeatherInfo data)
+        public void Update(object obj, WeatherInfoEventArgs data)
         {
             currentInfo = data;
             senderName = obj.ToString();
@@ -29,7 +29,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// <param name="observer">Observer for subscribing.</param>
         public void Register(WeatherData weather)
         {
-            weather.OnNewMail += Update;
+            weather.NewMail += Update;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ObserverPatternDemo.Implemantation.Observers
         /// <param name="observer">Observer for unsubscribing.</param>
         public void Unregister(WeatherData weather)
         {
-            weather.OnNewMail -= Update;
+            weather.NewMail -= Update;
         }
 
         /// <summary>

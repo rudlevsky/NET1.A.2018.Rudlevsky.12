@@ -18,7 +18,7 @@ namespace TimeEvent
         /// <param name="sender">Sender for subscribing.</param>
         public void Register(TimeSender sender)
         {
-            sender.OnNewMail += Update;
+            sender.NewMail += Update;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace TimeEvent
         /// <param name="sender">Sender for unsubscribing.</param>
         public void Unregister(TimeSender sender)
         {
-            sender.OnNewMail -= Update;
+            sender.NewMail -= Update;
         }
 
         /// <summary>

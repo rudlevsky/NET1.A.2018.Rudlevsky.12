@@ -10,7 +10,7 @@ namespace ObserverPatternDemo.Implemantation.Observable
         /// <summary>
         /// Contains subscribers methods.
         /// </summary>
-        public event EventHandler<WeatherInfo> OnNewMail;
+        public event EventHandler<WeatherInfoEventArgs> NewMail;
 
         /// <summary>
         /// Generates data and sends it to subscribers.
@@ -18,16 +18,16 @@ namespace ObserverPatternDemo.Implemantation.Observable
         public void Generate()
         {
             Random rand = new Random();
-            var currentData = new WeatherInfo { Temperature = rand.Next(40), Humidity = rand.Next(400, 500), Pressure = rand.Next(990, 1010) };
-            Notify(currentData);
+            var currentData = new WeatherInfoEventArgs { Temperature = rand.Next(40), Humidity = rand.Next(400, 500), Pressure = rand.Next(990, 1010) };
+            OnNewMail(currentData);
         }
 
         /// <summary>
         /// Notifies all observers.
         /// </summary>
-        protected virtual void Notify(WeatherInfo info)
+        protected virtual void OnNewMail(WeatherInfoEventArgs info)
         {
-            OnNewMail?.Invoke(this, info);
+            NewMail?.Invoke(this, info);
         }
     }
 }
